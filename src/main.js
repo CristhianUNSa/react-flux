@@ -3,7 +3,10 @@ $ = jQuery = require('jquery');
 var React = require('react');
 var Home = require('./components/homePage');
 var About = require('./components/about/aboutPage');
+var Header = require('./components/common/header');
 
+(function(win) {
+"use strict";
 var App = React.createClass({
   render: function(){
     var Child;
@@ -12,8 +15,9 @@ var App = React.createClass({
       default: Child = Home;
     }
 
-    return(
+    return (
       <div>
+        <Header />
         <Child />
       </div>
     );
@@ -21,9 +25,10 @@ var App = React.createClass({
 });
 
 function render(){
-  var route = window.location.hash.substr(1);
+  var route = win.location.hash.substr(1);
   React.render(<App route={route} />, document.getElementById('app'));
 }
 
-window.addEventListener('hashchange', render);
+win.addEventListener('hashchange', render);
 render();
+})(window);
