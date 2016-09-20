@@ -1,16 +1,17 @@
 "use strict";
 
 var React = require('react');
+var Link = require('react-router').Link;
 
 var AuthorList = React.createClass({
   propTypes: {
     authors: React.PropTypes.array.isRequired
   },
-  render: function(){
-    var createAuthorRow = function(author){
+  render: function () {
+    var createAuthorRow = function (author) {
       return (
         <tr key={author.id}>
-          <td><a href={"/#authors/" + author.id} >{author.id}</a></td>
+          <td><Link to="manageAuthor" params={{ id: author.id }} >{author.id}</Link></td>
           <td>{author.firstName} {author.lastName }</td>
         </tr>
       );
@@ -23,7 +24,7 @@ var AuthorList = React.createClass({
             <td>Name</td>
           </thead>
           <tbody>
-            {this.props.authors.map(createAuthorRow, this)}
+            {this.props.authors.map(createAuthorRow, this) }
           </tbody>
         </table>
       </div>
