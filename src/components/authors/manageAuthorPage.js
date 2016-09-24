@@ -28,11 +28,11 @@ var ManageAuthorPage = React.createClass({
     };
   },
 
-  componentWillMount: function(){
+  componentWillMount: function () {
     var authorId = this.props.params.id; //from the path author/:id
 
-    if(authorId){
-      this.setState({author: AuthorStore.getAuthorById(authorId)});
+    if (authorId) {
+      this.setState({ author: AuthorStore.getAuthorById(authorId) });
     }
   },
 
@@ -64,7 +64,12 @@ var ManageAuthorPage = React.createClass({
       return;
     }
     this.setState({ dirty: false });
-    AuthorActions.createAuthor(this.state.author);
+    if (this.state.author.id) {
+      AuthorActions.updateAuthor(this.state.author);
+    }
+    else {
+      AuthorActions.createAuthor(this.state.author);
+    }
     toastr.success('Author Saved');
     this.transitionTo('authors');
   },

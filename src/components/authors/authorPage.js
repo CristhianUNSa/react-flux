@@ -14,6 +14,19 @@ var AuthorPage = React.createClass({
     };
   },
 
+  componentWillMount: function () {
+    AuthorStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    AuthorStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function () {
+    debugger;
+    this.setState({ authors: AuthorStore.getAllAuthors() });
+  },
+
   render: function () {
     return (
       <div>
